@@ -1,16 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {LOCALE_ID, NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {FormsModule} from '@angular/forms';
+import {EuroPipe} from './pipes/euro.pipe';
+import {registerLocaleData} from '@angular/common';
+import localeNl from '@angular/common/locales/nl';
 
-import { AppComponent } from './app.component';
+registerLocaleData(localeNl, 'nl');
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EuroPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'nl'}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
