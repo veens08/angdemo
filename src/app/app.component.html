@@ -33,6 +33,9 @@
     <li>
       <label for="reactive-form-name-input">Name:</label>
       <input type="text" id="reactive-form-name-input" formControlName="name">
+      <span *ngIf="reactiveForm.controls.name.touched && reactiveForm.controls.name.invalid">*</span>
+      <span *ngIf="reactiveForm.controls.name.touched && reactiveForm.controls.name.errors?.required">Naam is een verplicht veld</span>
+      <span *ngIf="reactiveForm.controls.name.touched && reactiveForm.controls.name.errors?.pattern">Alleen kleine en grote letters en punt en de enkele quote zijn toegestaan</span>
     </li>
     <li>
       <label for="reactive-form-logo-input">Logo:</label>
@@ -43,7 +46,9 @@
       <input type="text" id="reactive-form-score-input" formControlName="score">
     </li>
     <li>
-      <button (click)="addFramework()">Save</button>
+      <button (click)="addFramework()"
+              [disabled]="reactiveForm.invalid">Save
+      </button>
     </li>
   </ul>
 </form>

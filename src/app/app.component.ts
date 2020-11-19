@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Framework} from './model/framework';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as util from 'util';
 
 @Component({
@@ -35,9 +35,19 @@ export class AppComponent {
     },
   ];
   reactiveForm = new FormGroup({
-    name: new FormControl(''),
-    logo: new FormControl(''),
-    score: new FormControl('')
+    name: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z.\'][a-zA-Z.\']*$'),
+    ]),
+    logo: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^https?://.*$')
+    ]),
+    score: new FormControl('', [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(10)
+    ])
   });
 
   addFramework(): void {
@@ -49,5 +59,6 @@ export class AppComponent {
       score: this.reactiveForm.value.score
     };
     this.frameworks.push(newFramework);
+    this.reactiveForm.reset();
   }
 }
