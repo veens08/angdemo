@@ -1,12 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EuroPipe} from './pipes/euro.pipe';
 import {registerLocaleData} from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 
-registerLocaleData(localeNl, 'nl');
+registerLocaleData(localeNl, 'nl-NL');
 
 @NgModule({
   declarations: [
@@ -15,9 +15,10 @@ registerLocaleData(localeNl, 'nl');
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'nl'}],
+  providers: [{provide: LOCALE_ID, useValue: 'nl-NL'}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

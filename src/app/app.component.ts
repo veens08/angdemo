@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {Framework} from './model/framework';
+import {FormControl, FormGroup} from '@angular/forms';
+import * as util from 'util';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,8 @@ export class AppComponent {
   now = new Date();
   buttonPressed = 0;
   title = 'Een Ander Titel';
+  structureForm: any;
+
   frameworks: Framework[] = [
     {
       id: 1,
@@ -30,21 +34,20 @@ export class AppComponent {
       score: 8
     },
   ];
+  reactiveForm = new FormGroup({
+    name: new FormControl(''),
+    logo: new FormControl(''),
+    score: new FormControl('')
+  });
 
-  veranderTitel() {
-    this.buttonPressed = this.buttonPressed + 1;
-    this.title = ' pressed ' + this.buttonPressed + ' times';
-    this.title = ` pressed ${this.buttonPressed} times`;
-  }
-
-  addFramework() {
-    let ember: Framework;
-    ember = {
-      id: 4,
-      name: 'Ember',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png',
-      score: 9
+  addFramework(): void {
+    this.structureForm = util.inspect(this.reactiveForm, {depth: 1});
+    const newFramework = {
+      id: this.frameworks.length + 1,
+      name: this.reactiveForm.value.name,
+      logo: this.reactiveForm.value.logo,
+      score: this.reactiveForm.value.score
     };
-    this.frameworks.push(ember);
+    this.frameworks.push(newFramework);
   }
 }

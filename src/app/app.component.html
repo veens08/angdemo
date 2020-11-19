@@ -2,9 +2,6 @@
 <h1>{{title}}</h1>
 <hr>
 <input [(ngModel)]="title" placeholder="Enter a title">
-
-<button (click)="veranderTitel()">Verander de titel</button>
-
 <hr>
 
 <!-- Dit is een html comment -->
@@ -31,12 +28,34 @@
   </tbody>
 </table>
 <hr>
-<button (click)="addFramework()">Voeg framework toe</button>
+<form [formGroup]="reactiveForm">
+  <ul>
+    <li>
+      <label for="reactive-form-name-input">Name:</label>
+      <input type="text" id="reactive-form-name-input" formControlName="name">
+    </li>
+    <li>
+      <label for="reactive-form-logo-input">Logo:</label>
+      <input type="text" id="reactive-form-logo-input" formControlName="logo">
+    </li>
+    <li>
+      <label for="reactive-form-score-input">Score:</label>
+      <input type="text" id="reactive-form-score-input" formControlName="score">
+    </li>
+    <li>
+      <button (click)="addFramework()">Save</button>
+    </li>
+  </ul>
+</form>
 <hr>
+
+
 <p>{{title}}</p>
 <p> Lowercase pipe: {{title | lowercase  }}</p>
 <p> Uppercase pipe: {{title | uppercase  }}</p>
 <p> Titlecase pipe: {{title | titlecase  }}</p>
-<p>{{now | date :'hh-mm-ss' }}</p>
+<p>{{now }}</p>
+<p>{{now | date :'hh:mm:ss' }}</p>
 <p>{{ 1234567.890 | euro }}</p>
+<p>{{structureForm | json}}</p>
 <hr>

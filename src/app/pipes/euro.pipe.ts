@@ -11,7 +11,7 @@ export class EuroPipe implements PipeTransform {
     if (!value && value !== 0) {
       return value;
     }
-    const currencyPipe = new CurrencyPipe('nl', 'EUR');
+    const currencyPipe = new CurrencyPipe('nl-NL', 'EUR');
     return currencyPipe.transform(value).replace(',00', '');
   }
 
