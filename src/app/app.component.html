@@ -3,7 +3,11 @@
 <hr>
 <input [(ngModel)]="title" placeholder="Enter a title">
 <hr>
-
+<button (click)="changeIsAlive()">Show Hive IsAlive</button>
+<h1 *ngIf="isAlive">
+<app-lifecycle></app-lifecycle>
+</h1>
+<hr>
 <!-- Dit is een html comment -->
 <!-- Dit wordt wel de emmet notatie genoemd-->
 <!-- table>thead>tr>th*4>-->

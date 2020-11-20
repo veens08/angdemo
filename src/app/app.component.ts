@@ -1,39 +1,27 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Framework} from './model/framework';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as util from 'util';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  constructor(private httpClient: HttpClient) {
+  }
+
   now = new Date();
   buttonPressed = 0;
   title = 'Een Ander Titel';
   structureForm: any;
 
-  frameworks: Framework[] = [
-    {
-      id: 1,
-      name: 'Angular',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1280px-Angular_full_color_logo.svg.png',
-      score: 10
-    },
-    {
-      id: 2,
-      name: 'React',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1920px-React-icon.svg.png',
-      score: 6
-    },
-    {
-      id: 3,
-      name: 'Vuejs',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1920px-Vue.js_Logo_2.svg.png',
-      score: 8
-    },
-  ];
+  frameworks: Framework[];
+
   reactiveForm = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -49,6 +37,17 @@ export class AppComponent {
       Validators.max(10)
     ])
   });
+  isAlive = true;
+
+
+  ngOnInit(): void {
+    const url = 'http://localhost:3000/frameworks';
+    let observable: Observable<Framework[]>;
+    observable = this.httpClient.get<Framework[]>(url);
+    observable.subscribe((fr) => {
+      this.frameworks = fr;
+    });
+  }
 
   addFramework(): void {
     this.structureForm = util.inspect(this.reactiveForm, {depth: 1});
@@ -61,4 +60,9 @@ export class AppComponent {
     this.frameworks.push(newFramework);
     this.reactiveForm.reset();
   }
+
+  changeIsAlive(): void {
+    this.isAlive = !this.isAlive;
+  }
+
 }
