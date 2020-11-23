@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Framework} from './model/framework';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as util from 'util';
-import {HttpClient} from '@angular/common/http';
+import {FrameworkDaoService} from './services/framework-dao.service';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ import {Observable} from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private frameworkDaoService: FrameworkDaoService) {
   }
 
   now = new Date();
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   title = 'Een Ander Titel';
   structureForm: any;
 
-  frameworks: Framework[];
+  frameworks: Framework[] ;
 
   reactiveForm = new FormGroup({
     name: new FormControl('', [
@@ -41,13 +41,11 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const url = 'http://localhost:3000/frameworks';
-    let observable: Observable<Framework[]>;
-    observable = this.httpClient.get<Framework[]>(url);
-    observable.subscribe((fr) => {
-      this.frameworks = fr;
-    });
+    const frameworks1: Observable<Framework[]> = this.frameworkDaoService.getFrameworks();
+    frameworks1.subscribe((fr) => {this.frameworks = fr; });
   }
+
+
 
   addFramework(): void {
     this.structureForm = util.inspect(this.reactiveForm, {depth: 1});
