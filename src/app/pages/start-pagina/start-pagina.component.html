@@ -1,0 +1,50 @@
+<!-- Dit is een html comment -->
+<!-- Dit wordt wel de emmet notatie genoemd-->
+<!-- table>thead>tr>th*4>-->
+<table>
+  <thead>
+  <tr>
+    <th>ID:</th>
+    <th>Name:</th>
+    <th>Logo:</th>
+    <th>Score:</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let f of frameworks">
+    <td>{{f.id}}</td>
+    <td>{{f.name}}</td>
+    <td><img
+      [src]="f.logo"
+      alt="logo framework"></td>
+    <td>{{f.score}}</td>
+  </tr>
+  </tbody>
+</table>
+<hr>
+<form [formGroup]="reactiveForm">
+  <ul>
+    <li>
+      <label for="reactive-form-name-input">Name:</label>
+      <input type="text" id="reactive-form-name-input" formControlName="name">
+      <span *ngIf="reactiveForm.controls.name.touched && reactiveForm.controls.name.invalid">*</span>
+      <span *ngIf="reactiveForm.controls.name.touched && reactiveForm.controls.name.errors?.required">Naam is een verplicht veld</span>
+      <span *ngIf="reactiveForm.controls.name.touched && reactiveForm.controls.name.errors?.pattern">Alleen kleine en grote letters en punt en de enkele quote zijn toegestaan</span>
+    </li>
+    <li>
+      <label for="reactive-form-logo-input">Logo:</label>
+      <input type="text" id="reactive-form-logo-input" formControlName="logo">
+    </li>
+    <li>
+      <label for="reactive-form-score-input">Score:</label>
+      <input type="text" id="reactive-form-score-input" formControlName="score">
+    </li>
+    <li>
+      <button (click)="addFramework()"
+              [disabled]="reactiveForm.invalid">Save
+      </button>
+    </li>
+  </ul>
+</form>
+<p>{{structureForm | json}}</p>
+<hr>

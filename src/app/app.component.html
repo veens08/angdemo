@@ -1,70 +1,10 @@
-<hr>
-<h1>{{title}}</h1>
-<hr>
-<input [(ngModel)]="title" placeholder="Enter a title">
-<hr>
-<button (click)="changeIsAlive()">Show Hive IsAlive</button>
-<h1 *ngIf="isAlive">
-<app-lifecycle></app-lifecycle>
-</h1>
-<hr>
-<!-- Dit is een html comment -->
-<!-- Dit wordt wel de emmet notatie genoemd-->
-<!-- table>thead>tr>th*4>-->
-<table>
-  <thead>
-  <tr>
-    <th>ID:</th>
-    <th>Name:</th>
-    <th>Logo:</th>
-    <th>Score:</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let f of frameworks">
-    <td>{{f.id}}</td>
-    <td>{{f.name}}</td>
-    <td><img
-      [src]="f.logo"
-      alt="logo framework"></td>
-    <td>{{f.score}}</td>
-  </tr>
-  </tbody>
-</table>
-<hr>
-<form [formGroup]="reactiveForm">
-  <ul>
-    <li>
-      <label for="reactive-form-name-input">Name:</label>
-      <input type="text" id="reactive-form-name-input" formControlName="name">
-      <span *ngIf="reactiveForm.controls.name.touched && reactiveForm.controls.name.invalid">*</span>
-      <span *ngIf="reactiveForm.controls.name.touched && reactiveForm.controls.name.errors?.required">Naam is een verplicht veld</span>
-      <span *ngIf="reactiveForm.controls.name.touched && reactiveForm.controls.name.errors?.pattern">Alleen kleine en grote letters en punt en de enkele quote zijn toegestaan</span>
-    </li>
-    <li>
-      <label for="reactive-form-logo-input">Logo:</label>
-      <input type="text" id="reactive-form-logo-input" formControlName="logo">
-    </li>
-    <li>
-      <label for="reactive-form-score-input">Score:</label>
-      <input type="text" id="reactive-form-score-input" formControlName="score">
-    </li>
-    <li>
-      <button (click)="addFramework()"
-              [disabled]="reactiveForm.invalid">Save
-      </button>
-    </li>
-  </ul>
-</form>
-<hr>
+<nav>
+  <ol>
+    <li><a routerLink="/start">start</a></li>
+    <li><a routerLink="/lifecycle">Lifecycle experiments</a></li>
+    <li><a routerLink="/pipe">Pipe experiments</a></li>
+    <li><a routerLink="/not-found">404</a></li>
+  </ol>
+  <router-outlet></router-outlet>
 
-
-<p>{{title}}</p>
-<p> Lowercase pipe: {{title | lowercase  }}</p>
-<p> Uppercase pipe: {{title | uppercase  }}</p>
-<p> Titlecase pipe: {{title | titlecase  }}</p>
-<p>{{now }}</p>
-<p>{{now | date :'hh:mm:ss' }}</p>
-<p>{{ 1234567.890 | euro }}</p>
-<p>{{structureForm | json}}</p>
-<hr>
+</nav>

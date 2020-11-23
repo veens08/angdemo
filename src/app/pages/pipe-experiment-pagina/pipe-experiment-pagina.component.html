@@ -1,0 +1,15 @@
+<hr>
+<h1>{{title}}</h1>
+<hr>
+<input [(ngModel)]="title" placeholder="Enter a title">
+
+
+
+<p>{{title}}</p>
+<p> Lowercase pipe: {{title | lowercase  }}</p>
+<p> Uppercase pipe: {{title | uppercase  }}</p>
+<p> Titlecase pipe: {{title | titlecase  }}</p>
+<p>{{now }}</p>
+<p>{{now | date :'hh:mm:ss' }}</p>
+<p>{{ 1234567.890 | euro }}</p>
+<hr>
