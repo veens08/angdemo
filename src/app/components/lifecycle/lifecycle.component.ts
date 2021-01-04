@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-lifecycle',
-  templateUrl: './lifecycle.component.html',
-  styleUrls: ['./lifecycle.component.css']
+  "selector": 'app-lifecycle',
+  "templateUrl": './lifecycle.component.html',
+  "styleUrls": ['./lifecycle.component.css']
 })
 export class LifecycleComponent implements OnInit, OnDestroy {
   isAlive = true;

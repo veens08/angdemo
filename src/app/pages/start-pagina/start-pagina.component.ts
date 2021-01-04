@@ -42,7 +42,6 @@ export class StartPaginaComponent implements OnInit {
     });
   }
 
-
   addFramework(): void {
     this.structureForm = util.inspect(this.reactiveForm, {depth: 1});
     const newFramework = {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Framework} from '../model/framework';
 
@@ -8,16 +8,20 @@ import {Framework} from '../model/framework';
 })
 export class FrameworkDaoService {
 
+  url = 'http://localhost:9080/JaxRs01-1.0-SNAPSHOT/resources/frameworks';
+
   constructor(private httpClient: HttpClient) {
   }
 
   getFrameworks(): Observable<Framework[]> {
-    const url = 'http://localhost:3000/frameworks';
     let observable: Observable<Framework[]>;
-    observable = this.httpClient.get<Framework[]>(url);
+    observable = this.httpClient.get<Framework[]>(this.url);
     return observable;
-    // observable.subscribe((fr) => {
-    //   this.frameworks = fr;
-    // });
+  }
+
+  save(frameworks: Framework): Observable<any> {
+     const contentTypeHeader = new HttpHeaders( {contentType: 'application/json'});
+     const observableResponse = this.httpClient.post(this.url, frameworks, {headers: contentTypeHeader});
+     return observableResponse;
   }
 }
